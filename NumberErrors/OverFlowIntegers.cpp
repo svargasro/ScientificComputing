@@ -1,3 +1,10 @@
+/*
+Vargas Rodríguez Sergio
+Rueda Mantilla Juan Diego
+
+
+ */
+
 #include <cstdio>
 
 int main(void)
