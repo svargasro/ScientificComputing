@@ -39,8 +39,8 @@ float s2(int N){
 
 int main(int argc, char *argv[]) {
 
-  int N = std::stoi(argv[1]);
-
+  //int N = std::stoi(argv[1]);
+  int N = 1e6;
   vector<float> sum1Vec = s1(N);
   //vector<float> sum2Vec = s2(N);
 
