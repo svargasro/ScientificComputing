@@ -36,8 +36,8 @@ int main(int argc, char *argv[]) {
   float relativDif;
 
   for (int i=1; i<=N ; i++ ) {
-    sum1=s1(N);
-    sum2=s2(N);
+    sum1=s1(i);
+    sum2=s2(i);
     relativDif = std::abs(1.0 - sum1/sum2);
     cout<<i<<" "<<sum1<<" "<<sum2<<" "<<" "<<relativDif<<" "<<endl;
   }
