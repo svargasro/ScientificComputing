@@ -19,22 +19,22 @@ vector<float> s1(int N){
     s1Vector[k-1]=s1;
 
   }
-          return s1Vector;
+  return s1Vector;
 }
 
 float s2(int N){
 
-    //vector<float> s2Vector(N);
-    float s2 = 0;
+  //vector<float> s2Vector(N);
+  float s2 = 0;
 
-    for (int k=N; k>0 ;k--) {
-      s2+= 1.0/k;
+  for (int k=N; k>0 ;k--) {
+    s2+= 1.0/k;
     //  s2Vector[N-k]=s2;
-      }
+  }
 
-     // return s2Vector;
-     return s2;
-    }
+  // return s2Vector;
+  return s2;
+}
 
 
 int main(int argc, char *argv[]) {
@@ -58,3 +58,33 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
+
+
+
+// Ejecutar en la consola de la forma ./a.out > data.txt
+
+//Código de Python para graficar.
+
+// import numpy as np
+// import matplotlib.pyplot as plt
+
+
+// n, relativDiff = np.genfromtxt('data.txt', unpack=True, usecols=(0, 3))
+
+// plt.style.use('seaborn-v0_8')
+
+// fig, axes = plt.subplots(figsize=(5, 6))
+
+// axes.plot(n, relativDiff, 'o', markersize=2, label=r'$\Delta$(N)')
+
+// # Se ajustan demás detalles del gráfico.
+
+
+// axes.set_xlabel('N', fontsize=12)
+// axes.set_ylabel(r'$\Delta$: Diferencia relativa.', fontsize=12)
+// # axes.legend(loc='upper left')
+// axes.grid(True, linestyle='--')
+// axes.set_title(f"Diferencia relativa vs N.", fontsize=14)
+// plt.tight_layout()
+// fig.savefig('Resultados.pdf')
+// plt.show()
