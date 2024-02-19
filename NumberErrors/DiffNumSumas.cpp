@@ -11,7 +11,6 @@ float s1(int N){
   for (int k=1; k<=N ;k++) {
 
     s1+= 1.0/k;
-    cout<<k<<endl;
   }
           return s1;
 }
