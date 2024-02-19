@@ -36,7 +36,7 @@ for (int i=1; i<=N ; i++ ) {
   sum1=s1(N);
   sum2=s2(N);
   relativDif = std::abs(1.0 - sum1/sum2);
-  cout<<N<<sum1<<sum2<<relativDif<<endl;
+  cout<<i<<" "<<sum1<<" "<<sum2<<" "<<" "<<relativDif<<" "<<endl;
  }
 
 
