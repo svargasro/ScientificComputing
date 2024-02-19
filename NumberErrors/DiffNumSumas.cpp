@@ -8,8 +8,10 @@ using std::endl;
 float s1(int N){
 float s1 = 0;
 
-for (int k=1; k<N ;k++) {
-  s1+= 1.0/k;
+for (int k=1; k<=N ;k++) {
+  s1=0;
+  //s1+= 1.0/k;
+  cout<<k<<endl;
  }
 return s1;
 }
@@ -18,9 +20,11 @@ float s2(int N){
 float s2 = 0;
 
 for (int k=N; k>0 ;k--) {
-  s2+= 1.0/k;
+  //s2+= 1.0/k;
+  cout<<k<<endl;
  }
-return s2;
+
+ return s2;
 }
 
 
