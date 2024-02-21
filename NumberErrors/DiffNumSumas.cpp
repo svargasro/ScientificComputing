@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
 
 // fig, axes = plt.subplots(figsize=(5, 6))
 
-// axes.plot(n, relativDiff, 'o', markersize=2, label=r'$\Delta$(N)')
+// axes.plot(n, relativDiff, '-', markersize=2, label=r'$\Delta$(N)')
 
 // # Se ajustan demás detalles del gráfico.
 
