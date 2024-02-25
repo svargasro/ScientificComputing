@@ -24,6 +24,11 @@
 #include <cstdlib>
 #include <vector>
 #include <cmath>
+#include <fstream>
+#include <string>
+using std::ofstream;
+using std::to_string;
+using std::string;
 using std::log;
 using std::vector;
 using std::cout;
@@ -88,7 +93,7 @@ int controlVar = 0; //Controla cuántos datos quedaron por fuera.
 
   for (int n=0;n<nsamples;++n) {
     double r = dis(gen);
-    cout<<r<<endl;
+//    cout<<r<<endl;
 
 
     if(r==xmax) {
@@ -111,13 +116,15 @@ int controlVar = 0; //Controla cuántos datos quedaron por fuera.
 
   }
 
-  cout<<"Ancho: "<<anchoInt<<endl;
+//  cout<<"Ancho: "<<anchoInt<<endl;
 
-                             for (int i=0;i<nbins;i++) {
-                                cout<<"[ "<<xmin+i*anchoInt<<","<<xmin + (i+1)*anchoInt<<" ]"<<" : "<<hist[i]<<endl;;
+                             // for (int i=0;i<nbins;i++) {
+                             //    cout<<"[ "<<xmin+i*anchoInt<<","<<xmin + (i+1)*anchoInt<<" ]"<<" : "<<hist[i]<<endl;;
 
-                             }
-cout<<"Datos ignorados: "<<controlVar<<endl;
+                             // }
+
+
+//cout<<"Datos ignorados: "<<controlVar<<endl;
 
 
 
@@ -131,6 +138,34 @@ cout<<"Datos ignorados: "<<controlVar<<endl;
 
 
 
-//TODO: compute and print the pdf.
+//Compute and print the pdf.
+
+/*
+Tenemos que para hallar la probabilidad empírica, debemos dividir las frecuencias del histograma por el número total de datos (hist[i]/nsamples).
+Luego, para obtener la densidad empírica, batsta dividir la probabilidad empírica entre el ancho del intervalo ((hist[i]/nsamples)/anchoInt)
+Y se asigna cada valor de densidad empírica al valor central de cada intervalo.
+*/
+
+//cout<<typeid(conversion).name()<<endl;
+
+
+string dataName = "data" + to_string(seed) + ".txt";
+ofstream fout;
+fout.open(dataName);
+
+
+  double SUM = 0.0;
+for (int i=0;i<nbins;i++) {
+
+  double xavg = ((xmin+i*anchoInt) + (xmin + (i+1)*anchoInt))/2.0;
+  double conversion =  static_cast<double>(1.0/(nsamples*anchoInt));
+  double pdfi = hist[i]*conversion;
+  fout<<xavg<<"\t"<<"\t"<<pdfi<<endl;
+  SUM += pdfi;
+ }
+fout.close();
+//cout<<"Suma :"<<SUM*anchoInt<<endl; //Este valor debería ser 1.
+
+
 
 }
