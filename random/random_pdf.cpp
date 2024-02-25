@@ -5,7 +5,7 @@
 
   Debo:
   - Adaptar el código para crear un histograma y a partir de él la
-  función de probabilidad e imprimirlo en un archivo. (Para varias semillas)
+  función de probabilidad e imprimirlo en un ARCHIVO. (Para varias semillas)
 
   - Crear una figura con las 3 pdf en la misma.
 
@@ -23,6 +23,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <cmath>
+using std::log;
 using std::vector;
 using std::cout;
 using std::endl;
@@ -61,20 +63,71 @@ Para más información, puede consultar "68–95–99.7 rule".
   */
 
   //Variables del histograma.
+
+  //Se inicializan xmin y xmax de acuerdo a lo explicado.
   xmin = mu - 3.0*sigma;
   xmax = mu + 3.0*sigma;
 
+  vector<int> hist(nbins,0); //Se crea el arreglo que alamenará las frecuencias. El histograma tiene nbins cajas y se inicializa en 0.
+
+  double anchoInt = (xmax - xmin)/nbins; //Se calcula el ancho del intervalo para luego calcular las cajas.
 
 
+
+  /*
+  Se puede calcular el ancho del intervalo para no obtener basado en nbins, pero para la cantidad de datos que se manejan,
+  es preferible usar el basado en nbins puesto que es más pequeño que el obtenido usando criterio de Sturges y demás.
+
+  double rango = xmax-xmin;
+  double clases = 1 + log(nsamples)/log(2); //Calculado con criterio de Sturges.
+  double ancho2 = rango/clases;
+  */
+
+
+int controlVar = 0; //Controla cuántos datos quedaron por fuera.
 
   for (int n=0;n<nsamples;++n) {
     double r = dis(gen);
     cout<<r<<endl;
-    //TODO: fil here the counting histogram stuff
+
+
+    if(r==xmax) {
+      hist.back()+=1;
+      continue;
+        } //Se toma el caso en que r==xmax aparte porque en el for siguiente no se toma en cuenta ese valor.
+
+
+    if(r>xmax or r<xmin){ controlVar+=1; continue;} //Si un valor está fuera del rango, no se usa en la muestra.
+    else {
+      //Se recorre un for, tomando los intervalos cerrados por izquierda.
+      for(int i=0; i<nbins; i++){
+        if(r>= (xmin+ i*anchoInt ) and r < (xmin + (i+1)*anchoInt)) {
+          hist[i]+=1; //Si cumple la condición, se suma 1 al intervalo correspondiente.
+          break; //Se rompe el segundo bucle en caso de que encuentre un valor que cumpla las conidiciones.
+        }
+      }
+
+    }
+
   }
 
+  cout<<"Ancho: "<<anchoInt<<endl;
+
+                             for (int i=0;i<nbins;i++) {
+                                cout<<"[ "<<xmin+i*anchoInt<<","<<xmin + (i+1)*anchoInt<<" ]"<<" : "<<hist[i]<<endl;;
+
+                             }
+cout<<"Datos ignorados: "<<controlVar<<endl;
 
 
+
+                             // for (int i=0;i<nbins;i++) {
+                             //   cout<<"[ "<<xmin+i*anchoInt<<","<<xmin + (i+1)*anchoInt<<" ]"<<" : ";
+                             //                                                            for (int j=0;j<hist[i];j++ ) {
+                             //                                                              cout<<"*";
+                             //                                                            }
+                             //                                                                cout<<endl;
+                             // }
 
 
 
