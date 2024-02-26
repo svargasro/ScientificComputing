@@ -57,6 +57,8 @@ print("Coeficiente de determinación R^2_3:", R2_3)
 
 
 
+#Ajustes y gráficas:
+
 plt.style.use('seaborn-v0_8')
 
 fig, axes = plt.subplots(figsize=(6, 7))
