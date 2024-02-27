@@ -46,13 +46,13 @@ R2_3 = 1 - sumaResidual3 / varianzaTotalpdf3
 
 # Imprimir los parámetros óptimos del ajuste y R^2
 print("Parámetros óptimos del ajuste gaussiano 1 (mu, sigma,A):", parametros1)
-print("Coeficiente de determinación R^2_1:", R2_1)
+print("Coeficiente de correlación R^2_1:", R2_1)
 
 print("Parámetros óptimos del ajuste gaussiano 2 (mu, sigma,A):", parametros2)
-print("Coeficiente de determinación R^2_2:", R2_2)
+print("Coeficiente de correlación R^2_2:", R2_2)
 
 print("Parámetros óptimos del ajuste gaussiano 3 (mu, sigma,A):", parametros3)
-print("Coeficiente de determinación R^2_3:", R2_3)
+print("Coeficiente de correlación R^2_3:", R2_3)
 
 
 

@@ -44,13 +44,16 @@ void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, d
     xmin = miu - 4*sigma  y xmax = miu + 4*sigma.
     Para más información, puede consultar "68–95–99.7 rule".
     Con 3 sigma también funciona, pero 4 sigma da un mejor coeficiente de correlación.
+    Lo anterior, en caso de querer inicializar xmin y xmax para cualquier mu y sigma dados.
+    Con estos xmin y xmax el coeficiente de correlación y al ajuste son muy buenos.
+     xmin = mu - 4.0*sigma;
+     xmax = mu + 4.0*sigma;
   */
 
   //Variables del histograma.
 
-  //Se inicializan xmin y xmax de acuerdo a lo explicado.
-  xmin = mu - 4.0*sigma;
-  xmax = mu + 4.0*sigma;
+
+
 
   vector<int> hist(nbins,0); //Se crea el arreglo que alamcenará las frecuencias. El histograma tiene nbins cajas y se inicializa en 0.
 
@@ -102,10 +105,10 @@ void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, d
     }
 
 
-    cout<<"Datos ignorados: "<<controlVar<<endl;
+
 
   */
-
+cout<<"Datos ignorados: "<<controlVar<<endl;
 
 
   //Compute and print the pdf.
@@ -133,7 +136,7 @@ void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, d
     SUM += pdfi;
   }
   fout.close();
-  //cout<<"Suma :"<<SUM*anchoInt<<endl; //Este valor debería ser 1.
+  cout<<"Suma :"<<SUM*anchoInt<<endl; //Este valor debería ser 1.
 
 }
 
@@ -187,13 +190,13 @@ R2_3 = 1 - sumaResidual3 / varianzaTotalpdf3
 
 # Imprimir los parámetros óptimos del ajuste y R^2
 print("Parámetros óptimos del ajuste gaussiano 1 (mu, sigma,A):", parametros1)
-print("Coeficiente de determinación R^2_1:", R2_1)
+print("Coeficiente de correlación R^2_1:", R2_1)
 
 print("Parámetros óptimos del ajuste gaussiano 2 (mu, sigma,A):", parametros2)
-print("Coeficiente de determinación R^2_2:", R2_2)
+print("Coeficiente de correlación R^2_2:", R2_2)
 
 print("Parámetros óptimos del ajuste gaussiano 3 (mu, sigma,A):", parametros3)
-print("Coeficiente de determinación R^2_3:", R2_3)
+print("Coeficiente de correlación R^2_3:", R2_3)
 
 
 
