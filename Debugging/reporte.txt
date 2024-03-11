@@ -1,0 +1,27 @@
+-Función main: (Líneas 15,16,17 y 18)
+El objetivo más probable de la función main es llamar las funciones. Sin embargo el resultado de dichas funciones no se le asigna a nada. Se les asigna una variable a cada una y se imprime en consola.
+
+
+-Función bar: (Línea 36)
+
+El objetivo más probable de la función es recibir dos enteros a y b, luego asignarle a c el valor no negativo de a, es decir, descartar el signo, para luego devolver el valor c+a-b. Sin embargo, el uso de "unsigned int" no es el más recomendable puesto que no tiene representación de valores negativos, por lo que si a es un entero negativo se obtiene un overflow. Se hacen las siguientes correcciones:
+
+1. Se le asigna a c, el valor absoluto de a, que devolverá con seguidad un entero y con lo cual se evita mezclar operaciones de unsigned int con int, pues no es recomendable.
+
+
+
+-Función foo: (Líneas 26,27 y 28)
+El objetivo inicial más probable de la función es recibir dos valores enteros de entrada, a y b, y devolver la suma de divisiones enteras siguientes: (a/b),(b/a) y b/bar(a,b). Sin embargo, no se tienen en cuenta los casos en que a es 0, b es 0 ó bar(a,b) es 0. Se hacen las siguientes correcciones.
+
+1. Se añaden respectivos if que verifican que a, b y bar(a,b) son distintos de 0. En caso contrario, se retorna "EXIT_FAILURE"  y se imprime un mensaje en la consola que indica que los argumentos de la función foo deben ser distintos de 0 y además que si a es mayor que 0, 2*a no puede ser igual a b. El último caso corresponde a cuando bar(a,b) sería 0.
+
+- Función baz: (Líneas 42,43,44 y 46)
+El objetivo inicial más probable de la función es recibir un número tipo double "x" y devolver la raíz cuadrada de la operación 1-(x+1), siempre que el número obtenido luego de la operación no sea menor que 0. Se usa un if para verificarlo. Se hacen las siguientes correciones:
+
+1. En el if, probablemente se quería comprobar cuándo el valor de entrada, x, era mayor que 0, pues en ese caso v sería menor que 0; por lo cual se cambió el operador  de asignación "=", por el operador ">" de comparación. Cabe aclarar que el uso del operador de asignación en un if es erróneo, pues devuelve el valor que fue asignado. En este caso, usar if(x==0) sería equivalente a usar if(false), por lo cual no se ejecutaría nunca lo que está dentro del if.
+
+2. En caso de que se ejecutara el if(), habría un error relacionado con el tipo de valor que debería devolver return, pues la función baz indica que devolverá un valor tipo double. Se corrige devolviendo "EXIT_FAILURE", y se imprime en la consola que el número introducido en la función baz debe ser menor o igual que 0.
+
+3. El valor calculado de v, se asigna como el que será calculado con std::sqrt(), de otro modo, no tendría sentido declararlo, pues no se usa en ninguna parte del código y al ser declarado dentro de la función, se perdería al terminar la ejecución.
+
+4. Se incluye un ; al final de la expresión que devuelve la raíz cuadrada de x, pues la expresión return siempre debe llevarlo.
