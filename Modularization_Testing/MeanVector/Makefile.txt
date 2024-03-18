@@ -1,3 +1,18 @@
+#Alternativa 1:
+#Este makefile funcionó haciendo uso de spack en un entorno, donde se
+#agregó "source $~/spack/setup-env.sh" a ~/.bashrc . Cabe aclarar
+#que la ruta que debe tener source es diferente dependiendo de dónde instaló
+#spack. Basta con usar "spack install catch2" y luego "spack load catch2".
+
+#Alternativa2:
+#Otra alternativa en donde también funciona es en el codespaces
+#creado en el repositorio del profesor donde solo se debe ejectuar el Makefile como
+#de costumbre.
+
+#Alternativa3:
+#Funciona también en Binder, corriendo el Makefile como de costumbre.
+
+
 all: vector_main.x
 
 %.x: %.o vector_ops.o
@@ -8,8 +23,6 @@ vector_test.x: vector_test.o vector_ops.o
 
 test: vector_test.x
 	./vector_test.x
-
-
 
 clean:
 	rm -f *.o *.x
