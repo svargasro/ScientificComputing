@@ -39,17 +39,20 @@ std::vector<double> oneDimensionVector = {oneDimensionVectorValue};
 
 //Vector de dimensión mayor a 100 que inicia desde 0.0 y sus elementos aumentan de a 1.
 /*
-En este caso, se calcula analíticamente el promedio teniendo en cuenta
-que si el vector tiene dimensión L, la suma interna de sus elementos se puede calcular como
-la sumatoria desde i=0 hasta L-1 de i; la cual mediante la sustitución m= i+1 se puede
-calcular analíticamente. De ese modo el promedio para un vector de dimensión L, siempre
-será (L+1)/2 - 1.
+En este caso, se calcula analíticamente el promedio de la siguiente forma:
+El vector que se usará tendrá la forma {0.0, 1.0, 2.0, 3.0, 4.0, ..., L-1}
+De ese modo, se tiene que la suma interna de sus elementos es la sumatoria desde i=0 hasta i=L-1 de i;
+la cual es una sumatoria de números naturales, que se puede calcular analíticamente con la fórmula de gauss de la
+suma de los n primeros números naturales. Así, se obtiene que la suma interna es (L-1)*L/2.
+
+Ahora, el promedio para un vector de dimensión L, se obtiene dividiendo la suma interna por el número de elementos.
+Así, el promedio siempre será (L-1)/2
  */
 const int L = 500; //Dimensión del vector.
 std::vector<double> bigVector(L);
 
 std::iota(bigVector.begin(), bigVector.end(), 0.0);
-double averageBigVector = (L+1)/2.0 -1.0; //Cálculo analítico del promedio.
+double averageBigVector = (L-1)/2.0; //Cálculo analítico del promedio.
 
 //Require:
 REQUIRE( std::fabs(1.0 - mean(sameValueVector)/sameValue) < relativPrec ); //Caso vector lleno de un mismo elemento.
