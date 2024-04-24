@@ -2,7 +2,7 @@
 #include <chrono>
 #include <ctime>
 #include <cmath>
-#include <eigen/Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 
 
 void multiply(const int size, double & wtime, double & ctime); // store time spent multiplying
@@ -17,11 +17,21 @@ int main(int argc, char ** argv)
 
   double mean_wtime, sigma_wtime;
   double mean_ctime, sigma_ctime;
-  stats(M, R, mean_wtime, sigma_wtime, mean_ctime, sigma_ctime);
-  std::cout << M
-            << "\t" << mean_wtime << "\t" << sigma_wtime
-            << "\t" << mean_ctime << "\t" << sigma_ctime
-            << std::endl;
+
+  double wtime =0;
+  double ctime = 0;
+  int size = M;
+  int rep = R;
+  //stats(M, R, mean_wtime, sigma_wtime, mean_ctime, sigma_ctime);
+
+  srand(rep+1); // change seed for each repetition
+  multiply(size, wtime, ctime);
+
+  //  std::cout << M
+            // << "\t" << mean_wtime << "\t" << sigma_wtime
+	    // << std::endl;
+            // << "\t" << mean_ctime << "\t" << sigma_ctime
+            // << std::endl;
 
   return 0;
 }
@@ -64,4 +74,6 @@ void multiply(const int size, double & wtime, double & ctime)
   ctime = 1.0*(c2-c1)/CLOCKS_PER_SEC;
   std::chrono::duration<double> elapsed_seconds = end-start;
   wtime = elapsed_seconds.count();
+  std::cout<<wtime<<std::endl;
+  
 }
