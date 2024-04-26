@@ -1,0 +1,3 @@
+for nth in {1..24}; do echo -n "$nth ";  OMP_NUM_THREADS=$nth ./openmp.x 800 2 2>/dev/null; done | tee times.txt
+
+awk '{print $1, 4.80248/$3,4.80248/$3/$1}' times.txt > speedUp.txt ##Cambiar el valor de referencia
