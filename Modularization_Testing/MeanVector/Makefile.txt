@@ -6,8 +6,7 @@
 
 #Alternativa2:
 #Otra alternativa en donde también funciona es en el codespaces
-#creado en el repositorio del profesor donde solo se debe ejectuar el Makefile como
-#de costumbre.
+#creado en el repositorio del profesor donde solo se debe #ejectuar el Makefile como de costumbre.
 
 #Alternativa3:
 #Funciona también en Binder, corriendo el Makefile como de costumbre.
