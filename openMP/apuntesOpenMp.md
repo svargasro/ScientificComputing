@@ -12,5 +12,20 @@ Y OMP_NUM_THREADS=2 ./a.out
 
 
 
+Repaso:
+openMP es para memoria compartida. 
+
+SpeedUp:
+S= T1/TN 
+S_ideal = T1/T1/N = N 
+
+Eficiencia:
+E = S/N
+
+
+thrd = ...
+
+
+
 
 
