@@ -1,6 +1,9 @@
+#!/bin/bash
 #SBATCH --partition=12threads
-#SBATCH --ntasks-per-node=12
-stress -t 10 -c 1
+#SBATCH --ntasks=18
+
+date
+srun stress -t 10 -c 1
 
 
 

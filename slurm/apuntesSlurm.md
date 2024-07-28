@@ -9,10 +9,13 @@ Comandos:
 Comando "srun -n 2 -N 2 hostname" 2 procesos en 2 nodos, por lo tanto en cada nodo un proceso. Salen 2 salas. 
 Cada partición tiene un número de nodos. (Nodo es como computador)
 * scancel JOBID: Cancela un srun
-
+* scontrol show partition "name" (Muestra info más general)
 Bandera -p indica partición: 
 
+* watch -n1 squeue (Ver comando cada 1 segundo)
+
 srun -p 12threads,16threads -n 10 -N 5 hostname
+
 
 
 Stress: 
@@ -22,4 +25,19 @@ stress -t 10 -c 1
 
 
 *********************************
-Slurm Scripts:
+Slurm Scripts: Queremos decirle a Slurm lo que necesitamos que haga. 
+Quiero dejar solo el comando stress dentro.
+
+job.sh
+Para correr: bash job.sh
+
+Comentarios dentro de .sh se escriben como $SBATCH (Ver job.sh)
+
+Para correr con $SBATCH:
+sbatch job.sh
+
+
+Hay generadores de scripts: https://wiki.nlhpc.cl/Generador_Scripts
+
+
+Para mandar escalamiento, revisar si los nodos tienen el mismo procesador, por ejemplo. Deben ser exactamente iguales. 
