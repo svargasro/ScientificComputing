@@ -41,3 +41,10 @@ Hay generadores de scripts: https://wiki.nlhpc.cl/Generador_Scripts
 
 
 Para mandar escalamiento, revisar si los nodos tienen el mismo procesador, por ejemplo. Deben ser exactamente iguales. 
+
+************************************************
+Con paralelo:
+
+Cuando estoy usando paralelo, entonces como quiero un solo comando pero que corra en varios nodos, entonces se usa #SBATCH --cpus-per-task=1
+
+A veces hay que poner ruta a donde está ejecutable. 
