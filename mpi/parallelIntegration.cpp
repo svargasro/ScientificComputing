@@ -49,11 +49,66 @@ double integral_serial(double xmin, double xmax, double n)
 }
 
 double integral_mpi(double xmin, double xmax, double n,int pid, int np){
+
+  //Dividir el dominio.
   int Nlocal= n/np;
   double Llocal = (xmax - xmin)/np;
   double xmin_local = xmin + pid*Llocal;
   double xmax_local = xmin_local + Llocal;
   double Ilocal = integral_serial(xmin_local,xmax_local,Nlocal);
   printf("The area from %lf to %lf is : %lf \n", xmin_local, xmax_local, Ilocal);
+
+  if (pid==0){
+  //Recibir datos parciales de los demás
+  double Itotal = Ilocal;
+  //Acumular
+  for(int ipid=1; ipid<np; ipid++){
+  //Recibir: mpi
+    int tag=0;
+    double Itmp;
+    MPI_Recv(&Itmp,1,MPI_DOUBLE, ipid,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+
+
+    Itotal += Itmp;
+  }
+  //Imprimir el valor total
+  printf("The area from %lf to %lf is : %lf \n", xmin, xmax, Itotal);
+  }
+  else{
+    int tag=0;
+    //Enviar mi suma parcial al pid 0
+    MPI_Send(&Ilocal,1,MPI_DOUBLE,0,tag, MPI_COMM_WORLD);
+      }
+
   return Ilocal;
 }
+
+
+/*
+Fernandez Llanes Jeysson
+Rueda Mantilla Juan Diego
+Rubiano Vargas Ruben Dario
+Vargas Rodriguez Sergio
+Arias Ortiz Maria Lucia
+*/
+
+
+/*
+MPI_Send(
+    void* data, //void es "cualquier tipo de dato".
+    int count, //Cuento a partir de la dirección de memoria la cantidad de bloques.
+    MPI_Datatype datatype, //Para que sepa qué tan grueso es el bloque de memoria.
+    int destination, //A quién se la envío.
+    int tag, //Identificador de envíos.
+    MPI_Comm communicator)
+
+MPI_Recv(
+    void* data, //Guardo lo que recibo.
+    int count,
+    MPI_Datatype datatype,
+    int source, //El pid del que recibo datos.
+    int tag,
+    MPI_Comm communicator,
+    MPI_Status* status)
+
+*/
