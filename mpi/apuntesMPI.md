@@ -36,3 +36,7 @@ Slurm: Manejador de recursos:
 Con sbatch lo corre en background, no interactivo.
 
 $sbatch ___.sh
+
+
+## IntroMPI (Memoria distribuida):
+
