@@ -1,4 +1,4 @@
-.txt
-.o
-.out
-.x
+*.txt
+*.o
+*.out
+*.x
