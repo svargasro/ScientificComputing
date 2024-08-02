@@ -3,20 +3,12 @@
 #include <string>
 
 /* Problem parameters */
-double f(double x);
-double integral_serial(double xmin, double xmax, double n);
-double integral_mpi(double xmin, double xmax, double n,int pid, int np);
+double pingPong(int integer,int pid, int np);
 
 int main(int argc, char **argv)
 {
-  if(argc!=4){
-    printf("Se deben recibir 3 argumentos");
-    return 1;
-      }
   
-  const int numberRects = std::stoi(argv[1]);
-  const double lowerLimit = std::stoi(argv[2]);
-  const double upperLimit = std::stoi(argv[3]);
+  int initialNumber=3;
 
   /* problem variables */
   int pid, np;
@@ -27,7 +19,7 @@ int main(int argc, char **argv)
   MPI_Comm_rank(MPI_COMM_WORLD, &pid);
 
 
-  integral_mpi(lowerLimit, upperLimit, numberRects, pid, np);
+  pingPong(initialNumber, pid, np);
 
 
   /* finish */
@@ -52,21 +44,13 @@ double integral_serial(double xmin, double xmax, double n)
   return area;
 }
 
-double integral_mpi(double xmin, double xmax, double n,int pid, int np){
-
-  //Dividir el dominio.
-  int Nlocal= n/np;
-  double Llocal = (xmax - xmin)/np;
-  double xmin_local = xmin + pid*Llocal;
-  double xmax_local = xmin_local + Llocal;
-  double Ilocal = integral_serial(xmin_local,xmax_local,Nlocal);
-  //  printf("The area from %lf to %lf is : %lf \n", xmin_local, xmax_local, Ilocal);
+double pingPong(int integer, int iterations,int pid, int np){
 
   if (pid==0){
-  //Recibir datos parciales de los demás
-  double Itotal = Ilocal;
-  //Acumular
-  for(int ipid=1; ipid<np; ipid++){
+  //Recibir datos parciales iniciales.
+   
+  //Modificación
+  for(int m=1; m<; ipid++){
   //Recibir: mpi
     int tag=0;
     double Itmp;
