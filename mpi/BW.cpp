@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-//for N in $(seq 0 500 10000); do mpirun -np 2 a.out $N; done > BW1PC.txt
+//for N in $(seq 0 500 20000); do mpirun -np 2 a.out $N; done > BW1PC.txt
 
 /*
   Arias Polanco Emmanuel, Castro Millan Juan Sebastian, Sanchez Poveda Juan Felipe, Millan Diaz Juan Esteban, Vargas Rodriguez Sergio.

@@ -18,6 +18,6 @@
 #srun --mpi=pmi2 hostname
 #srun echo $SLURMD_NODENAME
 #srun -n $SLURM_NTASKS ./a.out
-for N in $(seq 0 500 10000); do mpirun -np 2 ./a.out $N; done 
+for N in $(seq 0 500 20000); do mpirun -np 2 ./a.out $N; done 
 
 #mpirun hostname
