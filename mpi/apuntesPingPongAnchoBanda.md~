@@ -1,0 +1,8 @@
+Medimos BW vs tamaño.
+
+Veremos que cuando hagamos entre dos computadores va a tomar más tiempo que en un solo computador.
+
+Tenemos que mandar n enteros, a diferencia que en PingPong. No solo 1. -> Usamos un arreglo de tamaño N.
+
+MPI_Send(&)
+
