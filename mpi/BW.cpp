@@ -1,6 +1,7 @@
 #include <mpi.h>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 int main(int argc, char **argv)
 {
@@ -25,7 +26,7 @@ int main(int argc, char **argv)
 	  MPI_Recv(&msgVector[0], N, MPI_DOUBLE, 1, tag2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 	  Fin = MPI_Wtime();
 	  double t= Fin - Inicio;
-	  double bandWidth = N*sizeof(double)/(t/2.0);
+	  double bandWidth = (N*sizeof(double)/(t/2.0))/std::pow(10.0,6);
 	  std::cout<<N<<" "<<bandWidth<<std::endl;
 	  //	  std::cout<<t<<std::endl;
 	  
@@ -42,8 +43,11 @@ int main(int argc, char **argv)
     return 0;
 }
 
-//for N in $(seq 1 10 100); do mpirun -np 2 a.out $N; done > BW1PC.txt
+//for N in $(seq 0 500 10000); do mpirun -np 2 a.out $N; done > BW1PC.txt
 
+/*
+  Arias Polanco Emmanuel, Castro Millan Juan Sebastian, Sanchez Poveda Juan Felipe, Millan Diaz Juan Esteban, Vargas Rodriguez Sergio.
+ */
 
 
 
