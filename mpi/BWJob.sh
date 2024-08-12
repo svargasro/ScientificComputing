@@ -8,16 +8,6 @@
 #SBATCH --time=01:00:00            # Time limit hrs:min:sec
 #SBATCH --partition=12threads        # Partition name
 
-## Load the necessary modules (adjust based on your system)
-#module load mpi
-
-# Run the MPI program using srun
-#srun pwd
-#srun hostname
-#srun --mpi=pmi2 ./a.out
-#srun --mpi=pmi2 hostname
-#srun echo $SLURMD_NODENAME
-#srun -n $SLURM_NTASKS ./a.out
 for N in $(seq 0 500 30000); do mpirun -np 2 ./a.out $N; done 
 
-#mpirun hostname
+
