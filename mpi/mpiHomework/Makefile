@@ -3,7 +3,7 @@ all: distributedUnitMatrix.cpp.x
 
 distributedUnitMatrix.cpp.x: distributedUnitMatrix.cpp
 	mpic++ distributedUnitMatrix.cpp -o distributedUnitMatrix.x
-	mpirun -np 3 --oversubscribe distributedUnitMatrix.x
+	mpirun -np 3 --oversubscribe distributedUnitMatrix.x 6
 
 
 
