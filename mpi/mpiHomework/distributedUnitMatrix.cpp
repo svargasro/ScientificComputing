@@ -63,14 +63,15 @@ void fillMatrix(int N, int np, int pid){
     }
 
     std::vector<double> bandWidthVector(np-1); //Vector que guarda el bandWith de cada proceso.
+
     for(int ipid=1; ipid<np; ipid++){ //Bucle para recibir e imprimir la información de los otros procesos.
       std::vector<int> tmpLocalMatrix(matrixSize);
       initialTime = MPI_Wtime();
       MPI_Recv(&tmpLocalMatrix[0], matrixSize, MPI_INT, ipid, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       finalTime = MPI_Wtime();
       t= finalTime - initialTime;
-      bandWidthValue = (matrixSize*sizeof(int)/t)/std::pow(10.0,6);
-      bandWidthVector[ipid-1]= bandWidthValue;
+      bandWidthValue = (matrixSize*sizeof(int)/t)/std::pow(10.0,6); //Se calcula el Bandwidth en MB/s
+      bandWidthVector[ipid-1]= bandWidthValue; //Se guarda el valor del bandwidth de cada ipid.
       bandWidth += bandWidthValue; //bandwidth en MB/s se acumula el de todos los nodos.
       //std::cout<<"pid: "<<ipid<<"\n";
       for (int i=0;i<matrixSize;i++) { //Impresión de la matriz local de cada pid.
