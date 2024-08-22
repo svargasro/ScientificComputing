@@ -17,8 +17,8 @@ int main(int argc, char **argv)
 
   //Manejo de errores cuando np no es divisor de N. También maneja el caso en el que np sea mayor que N. El ejercicio pide que lo supongamos.
   if(pid==0){
-    if(N%np != 0){
-      std::cerr <<"El número de procesos (NP) debe ser divisor del tamaño de la matriz (N) y N >= NP"<<"\n";
+    if(N%np != 0 || N<=0){
+      std::cerr <<"El número de procesos (NP) debe ser divisor del tamaño de la matriz (N) y N >= NP y N>0"<<"\n";
       MPI_Abort(MPI_COMM_WORLD, 1);
     }
   }
