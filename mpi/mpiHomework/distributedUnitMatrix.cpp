@@ -54,7 +54,7 @@ void fillMatrix(int N, int np, int pid){
   int tag=0;
 
   if(pid==0){
-    double initialTime, finalTime,t;
+    double initialTime, finalTime,t,bandWidthValue;
     double bandWidth=0.0;
     //Se recorre el arreglo del pid=0 y para que quede como una matriz, se imprime un salto de línea cuando se completa el número de columnas.
     for (int i=0;i<matrixSize;i++) {
@@ -62,20 +62,28 @@ void fillMatrix(int N, int np, int pid){
       if((i+1)%N==0){std::cout<<"\n";}
     }
 
+    std::vector<double> bandWidthVector(np-1); //Vector que guarda el bandWith de cada proceso.
     for(int ipid=1; ipid<np; ipid++){ //Bucle para recibir e imprimir la información de los otros procesos.
       std::vector<int> tmpLocalMatrix(matrixSize);
       initialTime = MPI_Wtime();
       MPI_Recv(&tmpLocalMatrix[0], matrixSize, MPI_INT, ipid, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       finalTime = MPI_Wtime();
       t= finalTime - initialTime;
-      bandWidth += (matrixSize*sizeof(int)/t)/std::pow(10.0,6); //bandwidth en MB/s se acumula el de todos los nodos.
+      bandWidthValue = (matrixSize*sizeof(int)/t)/std::pow(10.0,6);
+      bandWidthVector[ipid-1]= bandWidthValue;
+      bandWidth += bandWidthValue; //bandwidth en MB/s se acumula el de todos los nodos.
       //std::cout<<"pid: "<<ipid<<"\n";
       for (int i=0;i<matrixSize;i++) { //Impresión de la matriz local de cada pid.
         std::cout<<tmpLocalMatrix[i]<<" ";
         if((i+1)%N==0){std::cout<<"\n";}
       }
     }
-    std::cout<<""<<bandWidth/(np-1)<<"\n"; //Se imprime el promedio de bandwidth en consola.
+    for(int ipid=1; ipid<np;ipid++){
+    std::cout<<"Bandwidth del pid 0 con pid "<<ipid<<": "<<bandWidthVector[ipid-1]<<" MB/s \n";
+    }
+
+    std::cout<<"Bandwidth promedio: "<<bandWidth/(np-1)<<" MB/s \n"; //Se imprime el promedio de bandwidth en consola.
+
   }
   else{
     MPI_Send(&localMatrix[0], matrixSize, MPI_INT, 0, tag, MPI_COMM_WORLD); //Envío de datos al pid=0
